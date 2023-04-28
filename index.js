@@ -49,9 +49,12 @@ const menuIds = [
 ];
 let currentMenuIndex = 0;
 
+const nextButton = document.getElementById('next_grey');
+
 allLi.forEach((li) => {
   li.addEventListener('click', () => {
     const currentMenu = document.getElementById(menuIds[currentMenuIndex]);
+
     currentMenu.style.display = 'none';
     currentMenuIndex++;
     const nextMenu = document.getElementById(menuIds[currentMenuIndex]);
