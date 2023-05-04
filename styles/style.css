@@ -17,22 +17,31 @@ body {
 /* Styling for header */
 header {
   background-color: #181818;
-  height: 60px;
+  height: 46px;
+  width: 320px;
+  margin: 0 auto;
   display: flex;
+  position: relative;
 }
 
 .image10 {
   display: none;
+  width: 48px;
+  height: 47px;
+  position: absolute;
+  left: 48px;
 }
 
 .text11 {
+  width: 192px;
+  height: 17px;
   position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 18px;
+  left: calc(100% - 192px / 2 - 23px);
+  transform: translateX(-50%);
   text-align: center;
-  color: #fff;
-  font-size: 18px;
+  color: #ffc700;
+  font-size: 12px;
   display: none;
 }
 
@@ -47,7 +56,7 @@ header {
 /* Styling for menu box */
 .menu-box {
   display: flex;
-  justify-content: space-around;
+  justify-content: column;
   width: 100vw;
   height: 100vh;
   background-color: #181818;
@@ -59,20 +68,17 @@ header {
   z-index: 9999; /* Ensure the sidebar overlays on top of other content */
 }
 
-.left-links {
-  float: right;
-}
-
 .close-icon {
   width: 28px;
   height: 28px;
+  margin-top: -28px;
   cursor: pointer;
   float: right;
 }
 
 .menu-links {
   text-align: center;
-  margin-top: 30%;
+  margin-left: 23px;
 }
 
 .menu-links a {
@@ -81,12 +87,16 @@ header {
   display: block;
   width: fit-content;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 27px;
+}
+
+.menu-links a:first-child {
+  margin-top: 64px;
 }
 
 /* Styling for container */
 .container {
-  display: none;
+  display: block;
   position: relative;
   max-width: 600px;
   margin: 0 auto;
@@ -309,11 +319,12 @@ header {
 }
 
 .container2 {
-  display: block;
+  display: none;
   height: 568px;
   position: relative;
   max-width: 600px;
   margin: 0 auto;
+  background-color: #acaab6;
 }
 
 .line-container {
@@ -338,7 +349,7 @@ header {
 }
 
 #next_grey {
-  position: absolute;
+  /* position: absolute; */
   bottom: 25px;
   left: 66px;
   z-index: 1;
@@ -347,6 +358,10 @@ header {
   border-radius: 20px;
   background-color: #dadada;
   cursor: pointer;
+}
+
+#next_grey:active {
+  background-color: #ffc700;
 }
 
 .image11 {
@@ -378,13 +393,14 @@ header {
 
 ul {
   list-style: none;
+  color: #ffffff;
 }
 
 li {
   width: 320px;
   height: 50px;
   top: 242px;
-  opacity: 0.15;
+  /* opacity: 0.15; */
   margin-bottom: 8px;
   background-image: url('Ellipse\ \(5\).png'); /* Set image as background */
   background-repeat: no-repeat; /* Prevent image from repeating */
@@ -402,27 +418,135 @@ li span {
   margin-left: 39px; /* Add left margin for text */
 }
 
-.menu1,
-.menu2,
-.menu3,
-.menu4,
-.menu5,
-.menu6,
-.menu7,
-.menu8,
-.menu9,
-.menu10,
-.menu11,
-.menu12,
-.menu13,
-.menu14 {
-  display: none;
-}
-
 .menu1 {
-  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.menu3-list li.clicked {
-  background-image: url('Ellipse\ \(8\).png');
+.question4_style {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 50px);
+  grid-gap: 10px;
+}
+
+.block {
+  background-color: lightblue;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.question6_style {
+  display: grid;
+  row-gap: 20px;
+}
+
+.question8_style {
+  display: grid;
+  row-gap: 20px;
+}
+
+.loader {
+  color: #03bd7c;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
