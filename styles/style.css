@@ -105,8 +105,10 @@ header {
 .image1 {
   position: relative;
   z-index: 0; /* Ensure the image is displayed below the sidebar */
-  width: 100%;
-  height: auto;
+  width: 320px;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
 }
 .text1 {
   position: absolute;
@@ -321,21 +323,37 @@ header {
 .container2 {
   display: none;
   height: 568px;
-  position: relative;
-  max-width: 600px;
+  width: 320px;
   margin: 0 auto;
   background-color: #acaab6;
 }
 
 .line-container {
-  position: absolute;
-  top: 63px;
-  left: 30px;
+  /* position: relative; */
+  margin-top: 17px;
+  margin-left: 30px;
   z-index: 1;
   width: 260px;
   height: 11px;
   border-radius: 10.5px;
   background-color: #eee;
+}
+
+.main_menu {
+  flex: 1; /* make this element take all remaining vertical space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* background-color: orange; */
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .line {
@@ -349,15 +367,15 @@ header {
 }
 
 #next_grey {
-  /* position: absolute; */
-  bottom: 25px;
-  left: 66px;
+  margin-bottom: 25px;
+  margin-left: 66px;
   z-index: 1;
-  width: 189px;
-  height: 41px;
+  width: 50%;
+  height: 10%;
   border-radius: 20px;
   background-color: #dadada;
   cursor: pointer;
+  margin-top: auto;
 }
 
 #next_grey:active {
@@ -416,13 +434,6 @@ li {
 
 li span {
   margin-left: 39px; /* Add left margin for text */
-}
-
-.menu1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .question4_style {

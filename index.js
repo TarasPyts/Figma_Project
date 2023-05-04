@@ -32,7 +32,7 @@ function hideContent() {
   const headerHeading = document.querySelector('.text11');
 
   container.forEach((c) => (c.style.display = 'none'));
-  container2.forEach((c) => (c.style.display = 'block'));
+  container2.forEach((c) => (c.style.display = 'grid'));
   headerImg.style.display = 'block';
   headerHeading.style.display = 'block';
 }
