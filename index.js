@@ -130,6 +130,7 @@ function updateQuestion() {
   optionsEl.innerHTML = '';
 
   if (currentQuestionIndex === 4) {
+    console.log('hi');
     // const optionsList = document.getElementById('options');
     optionsEl.classList.add('question4_style');
 
