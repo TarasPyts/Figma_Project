@@ -19,8 +19,10 @@ const nextButton = document.getElementById('next_grey');
 const line = document.querySelector('.line');
 const lineContainer = document.querySelector('.line-container');
 const loadingPage = document.createElement('div');
+let currentQuestionIndex = 0;
 
 goToTest.addEventListener('click', function () {
+  currentQuestionIndex = 0;
   optionsEl.classList.remove('finish_style');
   changeContentVisibility('none', 'grid', 'block', 'block');
   nextButton.style.display = 'block';
@@ -68,8 +70,6 @@ function changeContentVisibility(
   headerImg.style.display = headerImgVisibility;
   headerHeading.style.display = headerHeadingVisibility;
 }
-
-let currentQuestionIndex = 0;
 
 function updateQuestion() {
   const currentQuestion = questions[currentQuestionIndex];
@@ -271,6 +271,9 @@ function showFinishScreen() {
   optionsEl.appendChild(div1El);
 
   replaceOptionsEl(textConstants.QUOTE);
+
+  createImage(5);
+  createImage(6);
 
   const countDownDate = new Date(Date.now() + 600000).getTime();
   const x = setInterval(function () {
