@@ -1,5 +1,5 @@
 import questions from './questions.js';
-import vars from './variables.js';
+import textConstants from './variables.js';
 
 const menu = document.getElementById('menu');
 const menuIcon = document.getElementById('menu-icon');
@@ -9,23 +9,36 @@ const container = document.querySelectorAll('.container');
 const container2 = document.querySelectorAll('.container2');
 const headerImg = document.querySelector('.header_image');
 const linkMain = document.getElementById('main_link');
+const info = document.getElementById('info');
 const buttons = document.querySelectorAll('.button');
 const goToTest = document.getElementById('go_to_test');
 const answers = [];
 const questionEl = document.getElementById('question');
-const optionsEl = document.getElementById('options');
+const optionsEl = document.querySelector('.options');
 const nextButton = document.getElementById('next_grey');
 const line = document.querySelector('.line');
 const lineContainer = document.querySelector('.line-container');
 const loadingPage = document.createElement('div');
 
 goToTest.addEventListener('click', function () {
-  closemenu();
+  optionsEl.classList.remove('finish_style');
   changeContentVisibility('none', 'grid', 'block', 'block');
+  nextButton.style.display = 'block';
+  lineContainer.style.display = 'grid';
+  headerHeading.textContent = 'ТЕСТ НА ОПРЕДЕЛЕНИЕ IQ';
+  updateQuestion();
+  closemenu();
 });
 
 menuIcon.addEventListener('click', () => openmenu());
 closeMenuIcon.addEventListener('click', () => closemenu());
+
+info.addEventListener('click', function () {
+  closemenu();
+
+  goToTest.click();
+  showFinishScreen();
+});
 
 linkMain.addEventListener('click', function () {
   closemenu();
@@ -33,9 +46,7 @@ linkMain.addEventListener('click', function () {
 });
 
 buttons.forEach((btn) => {
-  btn.addEventListener('click', () =>
-    changeContentVisibility('none', 'grid', 'block', 'block')
-  );
+  btn.addEventListener('click', () => goToTest.click());
 });
 
 function openmenu() {
@@ -61,10 +72,6 @@ function changeContentVisibility(
 let currentQuestionIndex = 0;
 
 function updateQuestion() {
-  if (currentQuestionIndex === questions.length) {
-    return;
-  }
-
   const currentQuestion = questions[currentQuestionIndex];
   const currentOptions = currentQuestion.options;
 
@@ -89,9 +96,13 @@ function updateQuestion() {
     createImage(3);
     inputContainerMaker();
   } else if (currentQuestionIndex === 9) {
-    optionsEl.classList.replace('question8_style', 'question6_style');
+    optionsEl.classList.replace('question8_style', 'question9_style');
 
     createImage(2);
+
+    const lineDivEl = document.createElement('div');
+    lineDivEl.classList.add('horizontal-line');
+    optionsEl.appendChild(lineDivEl);
 
     createDivWithSquares(currentOptions);
   } else {
@@ -123,23 +134,13 @@ function inputContainerMaker() {
   for (let i = 0; i < currentOptions.length; i++) {
     const option = currentOptions[i];
     const label = document.createElement('label');
-    const input = document.createElement('input');
 
-    input.type = 'radio';
-    input.value = option;
-    input.innerHTML = option;
-    input.id = 'option' + i;
-    input.name = 'question';
-    label.for = input.id;
     label.innerHTML = option;
 
     const pairContainer = document.createElement('div');
-    const inputContainer = document.createElement('div');
 
-    pairContainer.appendChild(input);
     pairContainer.appendChild(label);
-    inputContainer.appendChild(pairContainer);
-    optionsEl.appendChild(inputContainer);
+    optionsEl.appendChild(pairContainer);
 
     pairContainer.addEventListener('click', handleOptionClick);
   }
@@ -148,21 +149,10 @@ function inputContainerMaker() {
 let selectedOption;
 
 function handleOptionClick(event) {
-  // Check if the event target is an input element
-  if (event.target.tagName === 'INPUT') {
-    // Set the selected option and check the input element
-    selectedOption = event.target.value;
-    event.target.checked = true;
-  }
-  // Check if the event target is a div element
-  else if (event.target.tagName === 'DIV') {
-    selectedOption = event.target.textContent;
-  }
+  selectedOption = event.target.textContent;
 
-  const divs = optionsEl.querySelectorAll('#options div');
+  const divs = optionsEl.querySelectorAll('.options div');
   divs.forEach((s) => s.classList.remove('selected'));
-
-  // Add the 'selected' class to the clicked div element
   event.currentTarget.classList.add('selected');
 
   nextButton.disabled = false;
@@ -180,7 +170,6 @@ function createColoredSquare(color) {
 
     selectedOption = square.style.backgroundColor;
     nextButton.disabled = false;
-    console.log(selectedOption);
   });
   return square;
 }
@@ -191,11 +180,12 @@ function handleNextButtonClick() {
 
     answers.push(selectedOption);
 
-    if (currentQuestionIndex === questions.length) {
+    if (currentQuestionIndex !== questions.length) {
+      updateQuestion();
+    } else {
       showLoadingScreen();
     }
 
-    updateQuestion();
     const lineWidth =
       ((currentQuestionIndex + 1) / (questions.length + 1)) * 100;
     line.style.width = `${lineWidth}%`;
@@ -210,7 +200,7 @@ function replaceQuestionEl(text) {
   optionsEl.innerHTML = '';
 
   const divEl = document.createElement('div');
-  const h3El = document.createElement('h3');
+  const h3El = document.createElement('h2');
   h3El.textContent = text;
   divEl.appendChild(h3El);
   questionEl.appendChild(divEl);
@@ -218,7 +208,7 @@ function replaceQuestionEl(text) {
 
 function replaceOptionsEl(text) {
   const divEl = document.createElement('div');
-  const h4El = document.createElement('h4');
+  const h4El = document.createElement('h5');
   h4El.textContent = text;
   divEl.appendChild(h4El);
   optionsEl.appendChild(divEl);
@@ -236,14 +226,14 @@ function createImage(imageNumber) {
 function showLoadingScreen() {
   line.style.width = '100%';
   nextButton.style.display = 'none';
-  optionsEl.classList.replace('question6_style', 'loader_style');
+  optionsEl.classList.replace('question9_style', 'loader_style');
   loadingPage.classList.add('loader');
 
-  replaceQuestionEl(vars.a);
+  replaceQuestionEl(textConstants.RESULT_PROCESSING);
 
   optionsEl.appendChild(loadingPage);
 
-  replaceOptionsEl(vars.b);
+  replaceOptionsEl(textConstants.THINKING_DETERMINATION);
 
   setTimeout(function () {
     showFinishScreen();
@@ -251,27 +241,52 @@ function showLoadingScreen() {
 }
 
 function showFinishScreen() {
-  optionsEl.classList.replace('loader_style', 'finish_style');
+  optionsEl.classList.remove('loader_style');
+  optionsEl.classList.add('finish_style');
+  nextButton.style.display = 'none';
   lineContainer.style.display = 'none';
   headerHeading.textContent = 'ГОТОВО!';
 
-  replaceQuestionEl(vars.c);
-  replaceOptionsEl(vars.d);
-  replaceOptionsEl(vars.e);
-  replaceOptionsEl(vars.f);
-  replaceOptionsEl(vars.g);
-  replaceOptionsEl(vars.h);
+  replaceQuestionEl();
+  replaceOptionsEl(textConstants.RESULT_CALCULATION);
+  replaceOptionsEl(textConstants.PERSON_RELATION);
+  replaceOptionsEl(textConstants.RESULT_RECEIVING);
+  replaceOptionsEl(textConstants.RESULT_ACCESS);
+  replaceOptionsEl(textConstants.RESULT_AVAILABLE);
 
+  const divEl = document.createElement('div');
+  const pEl = document.createElement('p');
+  pEl.classList.add('demo');
+  divEl.appendChild(pEl);
+  optionsEl.appendChild(divEl);
+
+  const div1El = document.createElement('div');
   const imgEl = document.createElement('img');
-  imgEl.src = 'styles/call(2).png';
-  imgEl.alt = 'call(2).png';
-  imgEl.width = 28.63;
-  imgEl.height = 27.29;
-  imgEl.style.cursor = 'pointer';
-  optionsEl.appendChild(imgEl);
+  imgEl.src = `styles/image(4).png`;
+  imgEl.alt = `image(4).png`;
+  div1El.appendChild(imgEl);
+  const h4El = document.createElement('h5');
+  h4El.textContent = textConstants.CALL_TO_GET_RESULT;
+  div1El.appendChild(h4El);
+  optionsEl.appendChild(div1El);
 
-  replaceOptionsEl(vars.i);
+  replaceOptionsEl(textConstants.QUOTE);
+
+  const countDownDate = new Date(Date.now() + 600000).getTime();
+  const x = setInterval(function () {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    pEl.textContent = `${minutes}:${seconds} минут`;
+    if (distance < 1000) {
+      clearInterval(x);
+      linkMain.click();
+    }
+  }, 1000);
 }
+
 nextButton.addEventListener('click', handleNextButtonClick);
 
 updateQuestion();
