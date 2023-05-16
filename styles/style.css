@@ -2,7 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-weight: 500;
+  font-weight: 400;
   font-family: PT serif;
 }
 
@@ -229,11 +229,14 @@ text-align: start;
   background-position: center;
   background-size: cover;
   height: 100vh;
+  position: relative;
 }
 
 .lightning_one {
   position: absolute;
-  margin-top: 50%;
+  top: 40%;
+  left: 0%;
+  /* margin-top: 50%; */
 }
 
 .lightning_one img {
@@ -244,7 +247,7 @@ text-align: start;
 .lightning_two {
   justify-self: end;
   position: absolute;
-  margin-bottom: 70%;
+ top: 15%;
 }
 
 .lightning_two img {
@@ -516,7 +519,8 @@ text-align: start;
   display: grid;
   text-align: center;
   justify-items: center;
-  grid-template-rows: 8% 12% 15% 22% 4% 6% 15% 18%;
+  grid-template-rows: 8% 12% 20% 22% 4% 6% 15% 13%;
+  position: relative;
   height: 100vh;
 }
 
@@ -600,7 +604,26 @@ text-align: start;
   color: rgba(255, 255, 255, 0.5);
 }
 
+.finish_style div:nth-child(9) {
+  position: absolute;
+  top: 60%;
+  left: 0%;
+}
 
+.finish_style div:nth-child(9) img {
+  width: 200%;
+  transform: rotate(-53.15°deg);
+}
+
+.finish_style div:nth-child(10) {
+  position: absolute;
+  justify-self: end;
+  top: 65%;
+}
+
+.finish_style div:nth-child(10) img {
+  width: 200px;
+}
 
 .loader {
   color: #03bd7c;
@@ -809,5 +832,10 @@ text-align: start;
 
 
 @media only screen and (orientation: landscape) {
-
+  body {
+    /* width: 70vh; */
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
 }
