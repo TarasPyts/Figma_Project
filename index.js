@@ -19,7 +19,13 @@ const nextButton = document.getElementById('next_grey');
 const line = document.querySelector('.line');
 const lineContainer = document.querySelector('.line-container');
 const loadingPage = document.createElement('div');
+const textContainerOne = document.querySelector('.text_container_one');
+const heading = textContainerOne.querySelector('h5');
 let currentQuestionIndex = 0;
+
+heading.addEventListener('click', function () {
+  window.scrollTo(0, document.body.scrollHeight);
+});
 
 goToTest.addEventListener('click', function () {
   currentQuestionIndex = 0;
@@ -274,6 +280,27 @@ function showFinishScreen() {
 
   createImage(5);
   createImage(6);
+
+  const parentDiv = document.querySelector('.finish_style');
+  const childDivs = parentDiv.querySelectorAll('div');
+  const fifthDiv = childDivs[6];
+
+  fifthDiv.addEventListener('click', () => {
+    fetch('https://swapi.dev/api/people/1/')
+      .then((response) => response.json())
+      .then((data) => {
+        replaceQuestionEl(`Your result:`);
+        replaceOptionsEl(`Hello ${data.name}`);
+        replaceOptionsEl(`Your height is: ${data.height} cm`);
+        replaceOptionsEl(`Your mass is: ${data.mass} kg`);
+        replaceOptionsEl(`Your hair color is: ${data.hair_color}`);
+        replaceOptionsEl(`Your skin color is: ${data.skin_color}`);
+        replaceOptionsEl(`Your eye color is: ${data.eye_color}`);
+      })
+      .catch((error) => {
+        console.log('An error occurred:', error);
+      });
+  });
 
   const countDownDate = new Date(Date.now() + 600000).getTime();
   const x = setInterval(function () {
